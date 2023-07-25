@@ -141,11 +141,24 @@ public class Model extends Observable {
                     board.move(col, row, next);
                     score += current.value() * 2;
 
+                    int thirdLine = row - 2;
+                    int forthLine = row - 3;
+                    if (thirdLine >= 0 && forthLine >= 0) {
+                        Tile third = board.tile(col, thirdLine);
+                        Tile forth = board.tile(col, forthLine);
+                        if (third != null && forth != null) {
+                            if (third.value() == forth.value()) {
+                                board.move(col, nextLine,forth);
+                                score += third.value() * 2;
+                            }
+                        }
+                    }
+
                     for (int p = nextLine - 1; p >= 0; p--) {
-                        Tile third = board.tile(col, p);
-                        if (third == null)
+                        Tile tile = board.tile(col, p);
+                        if (tile == null)
                             break;
-                        board.move(col, nextLine, third);
+                        board.move(col, p + 1, tile);
                     }
                 }
                 changed = true;
