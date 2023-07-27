@@ -1,6 +1,8 @@
 package IntList;
 
 import static org.junit.Assert.*;
+
+import afu.org.checkerframework.checker.oigj.qual.I;
 import org.junit.Test;
 
 public class SquarePrimesTest {
@@ -17,4 +19,13 @@ public class SquarePrimesTest {
         assertEquals("14 -> 15 -> 16 -> 289 -> 18", lst.toString());
         assertTrue(changed);
     }
+
+    @Test
+    public void testSquarePrimesCheckUpdate() {
+        IntList lst = IntList.of(2, 6, 7, 12, 24, 35, 37);
+        boolean changed = IntListExercises.squarePrimes(lst);
+        assertEquals("4 -> 6 -> 49 -> 12 -> 24 -> 35 -> 1369", lst.toString());
+        assertTrue(changed);
+    }
+
 }
