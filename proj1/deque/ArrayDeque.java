@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     private T[] items;
     private int size;
     private int nextFirst;
@@ -23,12 +23,8 @@ public class ArrayDeque<T> {
         else if (size == items.length) {
             T[] resizedItems = (T[]) new Object[size * 2];
             int count = 1;
-            for (T element : items) {
-                if (count > size)
-                    break;
-                if (element == null)
-                    continue;
-                resizedItems[count] = element;
+            for (int i = 0; i < size; i++) {
+                resizedItems[count] = get(i);
                 count++;
             }
             items = resizedItems;
@@ -51,14 +47,8 @@ public class ArrayDeque<T> {
         }
         else if (size == items.length) {
             T[] resizedItems = (T[]) new Object[size * 2];
-            int count = 0;
-            for (T element : items) {
-                if (count == size)
-                    break;
-                if (element == null)
-                    continue;
-                resizedItems[count] = element;
-                count++;
+            for (int i = 0; i < size; i++) {
+                resizedItems[i] = get(i);
             }
             items = resizedItems;
             items[size] = item;
@@ -80,14 +70,8 @@ public class ArrayDeque<T> {
         T removedItem = items[first];
         if (size < items.length / 4) {
             T[] resizedItems = (T[]) new Object[items.length / 4];
-            int count = 0;
-            for (T element : items) {
-                if (count == size)
-                    break;
-                if (element == null)
-                    continue;
-                resizedItems[count] = element;
-                count++;
+            for (int i = 0; i < size; i++) {
+                resizedItems[i] = get(i);
             }
             items = resizedItems;
             items[0] = null;
@@ -110,12 +94,8 @@ public class ArrayDeque<T> {
         T removedItem = items[last];
         if (size < items.length / 4) {
             T[] resizedItems = (T[]) new Object[items.length / 4];
-            int count = 0;
-            for (T element : items) {
-                if (count == size)
-                    break;
-                resizedItems[count] = element;
-                count++;
+            for (int i = 0; i < size; i++) {
+                resizedItems[i] = get(i);
             }
             items = resizedItems;
             items[size - 1] = null;
@@ -135,7 +115,7 @@ public class ArrayDeque<T> {
         if (index > size - 1 || index < 0)
             throw new IllegalArgumentException("Index is not existed.");
 
-        int actualIndex = (nextFirst + 1 + index + items.length) % items.length;
+        int actualIndex = (nextFirst + 1 + index) % items.length;
         return items[actualIndex];
     }
 
@@ -198,10 +178,6 @@ public class ArrayDeque<T> {
 
 
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     public int size() {
         return size;
     }
@@ -210,10 +186,8 @@ public class ArrayDeque<T> {
         if (isEmpty())
             return;
 
-        for (T item : items) {
-            if (item == null)
-                continue;
-            System.out.print(item + " ");
+        for (int i = 0; i < size; i++) {
+            System.out.print(get(i) + " ");
         }
         System.out.println();
     }
