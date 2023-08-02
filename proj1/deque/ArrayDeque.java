@@ -163,20 +163,38 @@ public class ArrayDeque<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof ArrayDeque<?> other) {
-            if (other == this)
-                return true;
-            if (other.size != this.size)
-                return false;
-
-            for (int i = 0; i < size; i++) {
-                if (other.get(i) != this.get(i))
-                    return false;
-            }
+        if (o == null)
+            return false;
+        if (o == this)
             return true;
+        if (o.getClass() != this.getClass())
+            return false;
+        ArrayDeque<T> other = (ArrayDeque<T>) o;
+        if (other.size() != this.size())
+            return false;
+        for (int i = 0; i < size; i++) {
+            if (other.get(i) != this.get(i))
+                return false;
         }
-        return false;
+        return true;
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (o instanceof ArrayDeque<?> other) {
+//            if (other == this)
+//                return true;
+//            if (other.size != this.size)
+//                return false;
+//
+//            for (int i = 0; i < size; i++) {
+//                if (other.get(i) != this.get(i))
+//                    return false;
+//            }
+//            return true;
+//        }
+//        return false;
+//    }
 
 
 

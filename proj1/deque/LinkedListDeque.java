@@ -136,19 +136,38 @@ public class LinkedListDeque<T>{
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof LinkedListDeque other) {
-            if (other == this)
-                return true;
-            if (other.size != this.size)
-                return false;
-            for (int count = 0; count < size; count++) {
-                if (other.get(count) != this.get(count))
-                    return false;
-            }
+        if (o == null)
+            return false;
+        if (o == this)
             return true;
+        if (o.getClass() != this.getClass())
+            return false;
+        LinkedListDeque<T> other = (LinkedListDeque<T>) o;
+        if (other.size() != this.size())
+            return false;
+        for (int i = 0; i < size; i++) {
+            if (other.get(i) != this.get(i))
+                return false;
         }
-        return false;
+        return true;
     }
+
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (o instanceof LinkedListDeque other) {
+//            if (other == this)
+//                return true;
+//            if (other.size != this.size)
+//                return false;
+//            for (int count = 0; count < size; count++) {
+//                if (other.get(count) != this.get(count))
+//                    return false;
+//            }
+//            return true;
+//        }
+//        return false;
+//    }
 
     public boolean isEmpty() {
         return (size == 0);
