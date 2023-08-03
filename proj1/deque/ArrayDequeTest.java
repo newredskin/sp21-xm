@@ -5,6 +5,7 @@ public class ArrayDequeTest {
         ArrayDeque<Integer> lld1 = new ArrayDeque<>();
         ArrayDeque<Integer> lld2 = new ArrayDeque<>();
         ArrayDeque<String> lld3 = new ArrayDeque<>();
+        LinkedListDeque<Integer> lld4 = new LinkedListDeque<>();
 //        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
 //        LinkedListDeque<Integer> lld2 = new LinkedListDeque<>(1);
 //        LinkedListDeque<String> lld3 = new LinkedListDeque<>();
@@ -30,6 +31,11 @@ public class ArrayDequeTest {
         lld3.addLast("Tianye");
         lld3.addFirst("Xiye");
 
+        lld4.addLast(1);
+        lld4.addLast(5);
+        lld4.addLast(10);
+        lld4.addLast(15);
+
 //        lld3.printDeque();
         lld3.removeFirst();
         lld3.removeLast();
@@ -39,5 +45,7 @@ public class ArrayDequeTest {
         lld1.printDeque();
         lld2.printDeque();
         lld3.printDeque();
+        lld4.printDeque();
+        System.out.println(lld4.equals(lld2));
     }
 }
