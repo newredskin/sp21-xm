@@ -18,7 +18,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
             nextFirst = items.length - 1;
             nextLast = 1;
             items[0] = item;
-        } else if (size == items.length) {
+        } else if (size == items.length - 2) {
             T[] resizedItems = (T[]) new Object[size * 2];
             int count = 1;
             for (int i = 0; i < size; i++) {
@@ -41,7 +41,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
             nextFirst = items.length - 1;
             nextLast = size + 1;
             items[0] = item;
-        } else if (size == items.length) {
+        } else if (size == items.length - 2) {
             T[] resizedItems = (T[]) new Object[size * 2];
             for (int i = 0; i < size; i++) {
                 resizedItems[i] = get(i);
@@ -64,7 +64,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
         int first = (nextFirst + 1) % items.length;
         T removedItem = items[first];
-        if (size < items.length / 4) {
+        if (size < items.length / 4 && size > 8) {
             T[] resizedItems = (T[]) new Object[items.length / 4];
             for (int i = 0; i < size; i++) {
                 resizedItems[i] = get(i);
@@ -88,7 +88,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
         int last = (nextLast - 1 + items.length) % items.length;
         T removedItem = items[last];
-        if (size < items.length / 4) {
+        if (size < items.length / 4 && size > 8) {
             T[] resizedItems = (T[]) new Object[items.length / 4];
             for (int i = 0; i < size; i++) {
                 resizedItems[i] = get(i);
